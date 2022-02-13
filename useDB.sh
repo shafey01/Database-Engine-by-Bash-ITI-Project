@@ -27,16 +27,17 @@ useDatabaseMainMenu(){
 
 
 
-ehco 'Enter Database name: ';
+echo 'Enter Database name: ';
+
 read current_DB;
 
-if [[-d ./Databases/$current_DB/]]
+if [[ -d ./Databases/$current_DB/ ]]
 then
     #Database exists
-    ehco "Database $current_DB is selected";
+    echo "Database $current_DB is selected";
     export current_DB;
 else
     #Database deosn't exist
-    ehco "Couldn't find database with name: $current_DB";
-    . ./mainMenu.sh
+    echo "Couldn't find database with name: $current_DB";
+    . ./main.sh
 fi

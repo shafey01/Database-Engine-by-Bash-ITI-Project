@@ -3,9 +3,9 @@
 #echo $(date)
 
 #options=("Show Databases" "Create DataBase"  "Use DataBase" "Drop DataBase" "Exit")
- 
-
-
+let -i i=1
+while [[ $i != 0 ]]
+do
 	select option in "Show Databases" "Create Database"  "Use Database" "Drop Database" "Exit"
 	do
 		case $option in 
@@ -19,7 +19,7 @@
 			"Drop Database") echo "$LOGNAME drop databases in $(date)" >> dbms.log;
 			       	. ./dropDatabse.sh;  break;;
 		
-			"Exit")  break ;;
+			"Exit") (( i=0  ))  ; break ;;
 
 			*) echo "..............................................";
 			   echo "|Invaild Option Please choose one of the menu|";
@@ -32,7 +32,7 @@
 
 	done
  
-
+done
 #echo "..........."
 #echo "|thank you|"
 #echo "..........."  

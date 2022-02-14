@@ -2,15 +2,15 @@
 
 #useDatabaseMenu
 useDatabaseMainMenu(){
-    ehco "Selected Database is: $current_DB";
-    options=("Show Tables", "Create New Table", "Delete existing Table", "Insert into Table", "Update Table", "Select from Table", "Return to main menu");
+    echo "Selected Database is: $current_DB";
+    options=("Show Tables" "Create New Table" "Delete existing Table" "Insert into Table" "Update Table" "Select from Table" "Return to main menu");
     while [[ "$option" != "Return to main menu" ]] 
     do
     select option in "${options[@]}"
     do
         case $option in
             "Show Tables") . ./showTables.sh;break ;;
-            "Create New Table") . ./createTable.sh; break;;
+            "Create New Table") . ./createTable; break;;
             "Insert into Table") . ./insertIntoTable.sh; break;;
             "Delete existing Table") . ./deleteTable.sh; break ;;
             "Update Table") . ./updateTable.sh; break ;;
@@ -36,6 +36,7 @@ then
     #Database exists
     echo "Database $current_DB is selected";
     export current_DB;
+	useDatabaseMainMenu;
 else
     #Database deosn't exist
     echo "Couldn't find database with name: $current_DB";

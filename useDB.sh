@@ -3,7 +3,7 @@
 #useDatabaseMenu
 useDatabaseMainMenu(){
     echo "Selected Database is: $current_DB";
-    options=("Show Tables", "Create New Table", "Delete existing Table", "Insert into Table", "Update Table", "Select from Table", "Return to main menu");
+    options=("Show Tables" "Create New Table" "Delete existing Table" "Insert into Table" "Update Table" "Select from Table" "Return to main menu");
     while [[ "$option" != "Return to main menu" ]] 
     do
     select option in "${options[@]}"

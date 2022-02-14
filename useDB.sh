@@ -12,10 +12,10 @@ useDatabaseMainMenu(){
             "Show Tables") . ./showTables.sh;break ;;
             "Create New Table") . ./createTable; break;;
             "Insert into Table") . ./insertIntoTable.sh; break;;
-            "Delete existing Table") . ./deleteTable.sh; break ;;
+            "Drop existing Table") . ./deleteTable.sh; break ;;
             "Update Table") . ./updateTable.sh; break ;;
             "Select from Table") . ./selectFromTable.sh; break;;
-            "Return to main menu") . ./mainMenu.sh; exit $? ;;
+            "Return to main menu") . ./main.sh; exit $? ;;
             *) echo "Invalid option $REPLY , choose again";;
         esac
     done

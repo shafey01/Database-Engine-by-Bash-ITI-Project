@@ -14,7 +14,7 @@ useDatabaseMainMenu(){
             "Insert into Table") . ./insertIntoTable.sh; break;;
             "Drop existing Table") . ./deleteTable.sh; break ;;
             "Update Table") . ./updateTable.sh; break ;;
-            "Select from Table") . ./selectFromTable.sh; break;;
+            "Select from Table") . ./select.sh; break;;
             "Return to main menu") . ./main.sh; exit $? ;;
             *) echo "Invalid option $REPLY , choose again";;
         esac

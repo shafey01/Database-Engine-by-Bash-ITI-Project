@@ -1,0 +1,206 @@
+#!/bin/bash 
+clear;
+function tableNameValidation(){
+
+#	echo "here $1";
+
+validationFlag=0;
+
+IFS=' ' read -r -a tableArray <<< $1;
+
+if (( ${#tableArray[@]} > 1 )); then
+
+	echo "Table name can't contain SPACE."
+	validationFlag=1;
+
+fi
+
+if (( ${#tableArray[@]} == 0  )); then
+	
+	echo "Table name can't be EMPTY."
+	validationFlag=1;
+
+fi
+
+firstCharacter="${tableArray[0]:0:1}"
+if [[  $firstCharacter =~ [0-9] ]]; then
+	echo "Table name can't start with NUMBER."
+        validationFlag=1;
+fi
+
+if [[ "$1" =~ [A-Za-z]  ]]; then
+
+	echo "Valid Table Name."
+else
+	echo "Table name must have one Character."
+	validationFlag=1;
+
+fi
+
+
+return $validationFlag;
+
+
+
+}
+
+
+function tableExist(){
+
+	currentdb=$1;
+	tableName=$2;
+	validationFlag=0;
+
+#echo "current $currentdb , $tableName "
+
+if [[ -f Databases/$currentdb/Data/$tableName  ]]; then
+		echo " This Table Already Exist."
+		validationFlag=1;
+	fi
+
+	return  $validationFlag;
+
+
+}
+
+function columnNameValidation(){
+
+validationFlag=0;
+
+IFS=' ' read -r -a  cloumnArray <<< $1;
+
+if (( ${#cloumnArray[@]} > 1 )); then
+
+        echo "Cloumn name can't contain SPACE."
+        validationFlag=1;
+
+fi
+
+if (( ${#cloumnArray[@]} == 0  )); then
+
+        echo "cloumn name can't be EMPTY."
+        validationFlag=1;
+
+fi
+
+firstCharacter="${cloumnArray[0]:0:1}"
+echo "first $firstCharacter ...";
+
+if [[  $firstCharacter =~ [0-9] ]]; then
+        echo "cloumn name can't start with NUMBER."
+        validationFlag=1;
+fi
+
+
+if [[ "$1" =~ [A-Za-z]  ]]; then
+
+        echo "Valid cloumn Name."
+else
+        echo "cloumn name must have one Character."
+        validationFlag=1;
+
+fi
+
+return $validationFlag;
+
+
+
+
+}
+
+function createColumn(){
+let -i flag=0;
+read -p "Enter number of columns" columnsNumber;
+
+for (( i=0; i<$columnsNumber; i++  ))
+do
+	columnMD="";
+	read -p "Enter column Name." columnName;
+	columnNameValidation "$columnName";
+
+	namevalid=$?;
+	
+	if [[ $namevalid == 0  ]]; then
+		
+		columnMD="$columnName";
+		read -p " choose column Data Type 's/S' for String or 'i/I' for Integer (s/i) " columnDT;
+		if [[ $columnDT == "s" || $columnDT == "S"  ]] ; then
+			columnMD="$columnMD;string";
+		elif [[  $columnDT == "i" || $columnDT == "I"  ]]; then
+		       columnMD="$columnMD;int";	
+		fi
+		
+	#	read -p "you want to make it Primary Key?.(y/n) " primaryKey;
+		if [[ $flag == 0  ]]; then
+		read -p "you want to make it Primary Key?.(y/n) " primaryKey;
+
+			if [[ $primaryKey == "y" || $primaryKey == "Y"  ]] ; then
+				columnMD="$columnMD;PrimaryKey";
+				let flag=1 ;
+				echo "varaible i = $flag";
+			fi
+		else
+			echo "You can't make two Primary Key Into One Table";
+		fi
+		
+		echo $columnMD >> "Databases/$current_DB/MetaData/$tableName.metadata";
+
+
+	else
+		echo " column Name is InValid Please try a valid name";
+			
+	fi
+
+done
+
+
+}
+
+
+
+read -p "Enter table Name: " tableName;
+
+tableNameValidation "$tableName";
+
+
+
+tableNameFlag=$?;
+
+
+tableExist  "$current_DB"  "$tableName";
+
+tableExistFlag=$?;
+
+echo "call1 ,,  $tableNameFlag ";
+
+echo " call2 ,, $tableExistFlag ";
+
+
+if [[ $tableNameFlag  == 0  &&  $tableExistFlag == 0 ]] ; then
+
+	if touch Databases/$current_DB/Data/$tableName; then
+	
+		if touch Databases/$current_DB/MetaData/$tableName.metadata; then	
+			echo "Table $tableName created successfully ";
+		else 
+			echo "there is a problem in creating table check log.";
+
+		fi
+	
+
+		if createColumn; then
+			echo "OK";
+			cat Databases/$current_DB/MetaData/$tableName.metadata;
+		else
+			echo "Error";
+		fi
+
+	else
+	       echo "ERROR";	
+	fi
+
+else
+echo " There is A problem in creating table check logs............";
+fi
+
+

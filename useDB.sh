@@ -9,7 +9,7 @@ useDatabaseMainMenu(){
     do
         case $option in
             "Show Tables") . ./showTables.sh;break ;;
-            "Create New Table") . ./createTable.sh; break;;
+            "Create New Table") . ./createTable; break;;
             "Insert into Table") . ./insertIntoTable.sh; break;;
             "Drop existing Table") . ./dropTable.sh; break ;;
             "Update Table") . ./updateTable.sh; break ;;

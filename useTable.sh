@@ -7,9 +7,10 @@ function useTableMainMenu
     echo "Selected Table is: $current_table";
     while [[ "$option" != "Go back" ]] 
     do
-    select option in "Insert" "Delete Record" "Select All Table" "Select Column" "Select Record" "Go back"
+    select option in "Show Columns" "Insert" "Delete Record" "Select All Table" "Select Column" "Select Record" "Go back"
     do
         case $option in
+            "Show Columns") . ./showColumns.sh; break ;;
             "Insert") . ./insertIntoTable.sh;break ;;
             "Delete Record") . ./deleteRecord.sh; break;;
             "Select All Table") . ./select.sh; break;;

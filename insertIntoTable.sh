@@ -70,7 +70,8 @@ function readField
     (( aborted = 0 ))
     while [[ $valid -eq 0 ]]
     do
-        echo "Input Field \"${fieldName}\":";
+        echo "";
+echo -e "\033[32m Input Field \"${fieldName}\": \033[m" 
         read value;
         if [[ ${nn} == 1 ]] || [[ ${pk} == 1 ]] ; then  #Not null constrain
             if ! isNotNull $value ; then
@@ -85,7 +86,8 @@ function readField
         fi
         if [[ ${un} == 1 ]] || [[ ${pk} == 1 ]] ; then  #Unique constrain
             if ! isUnique $value $fieldNum  ; then
-                echo 'Is not Unique';
+echo -e "\033[31m Is not Unique  \033[m" 
+                echo '';
                 if retryOrCancel ; then
                     continue;
                 else
@@ -97,7 +99,8 @@ function readField
         echo ${dataType};
         if [[ ${dataType} == "int" ]] ; then
             if  ! isNumber $value  ; then
-                echo 'Is not a number';
+                echo '';
+echo -e "\033[31m Is not a number  \033[m" 
                 if retryOrCancel ; then
                     continue;
                 else
@@ -116,7 +119,8 @@ function readField
 }
 
 
-echo "Inserting into: \"${current_table}\"";
+echo "";
+echo -e "\033[32m Inserting into: \"${current_table}\"  \033[m" 
 ((i=1))
 
 for line in `cat ${metadataFilePath}`
@@ -136,7 +140,8 @@ done
 if [[ ${aborted} == 0 ]] ; then
     record=${record::-1}    #Remove the last char (the last comma)
     echo $record >> $dataFilePath; #Admit to the datafile
-    echo 'Record Saved Successfully!';
+echo -e "\033[32m Record Saved Successfully!  \033[m" 
+    echo '';
 echo "$LOGNAME insert into $current_table table in $(date)" >> dbms.log
 fi
 

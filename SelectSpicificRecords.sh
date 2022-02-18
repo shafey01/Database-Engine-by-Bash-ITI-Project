@@ -17,7 +17,8 @@ echo "$LOGNAME select from $current_table in $(date)" >> dbms.log
 dataFilePath="./Databases/${current_DB}/Data/${current_table}";
 metadataFilePath="./Databases/${current_DB}/MetaData/${current_table}.metadata";
 
-echo "enter column name to set a conidition on: ";
+echo " ";
+echo -e "\033[32mEnter column name to set a conidition on: \033[m" 
 read col;
 
 ret=$( cut -d: -f1 ${metadataFilePath} | grep ${col}; );
@@ -25,7 +26,8 @@ if [[ ${ret} == ${col} ]] ; then
     #column found
 
     colNum=$(awk -F: -v c=$col '{if(c == $1){print NR}}' $metadataFilePath);
-    echo "Enter value to be compared with: ";
+echo -e "\033[32mEnter value to be compared with: \033[m" 
+    echo " ";
     read val;
     tableHeader=$(getTableHeader $metadataFilePath);
     recods=`awk -F, -v colNumber=$colNum -v value=$val '{if($colNumber == value){printf "%s\n",$0}}' ${dataFilePath}`;
@@ -35,8 +37,10 @@ if [[ ${ret} == ${col} ]] ; then
         echo "$recods" | column -t -o '|' -s, -N $tableHeader;
     else
         #No recods found matching this condition
-        echo 'No recods found matching this condition';
+        echo '';
+echo -e "\033[31m No recods found matching this condition \033[m" 
     fi
 else
-    echo 'No such column';
+    echo '';
+echo -e "\033[31m No such column \033[m" 
 fi

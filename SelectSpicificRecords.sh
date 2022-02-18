@@ -4,7 +4,7 @@ function getTableHeader
 {
     metaData_file_path=$1;
     tableHeader="";
-    for rowHeader in `cut -f1 -d: $metaData_file_path | cat`
+    for rowHeader in `cut -f1 -d: $metaData_file_path`
     do
         tableHeader=${tableHeader}${rowHeader}',';
     done
@@ -28,7 +28,7 @@ if [[ ${ret} == ${col} ]] ; then
     echo "Enter value to be compared with: ";
     read val;
     tableHeader=$(getTableHeader $metadataFilePath);
-    recods=`awk -F, -v colNumber=$colNum -v value=$val '{if($colNumber == value){printf "%s\n",$0}}' ${dataFilePath} | cat`;
+    recods=`awk -F, -v colNumber=$colNum -v value=$val '{if($colNumber == value){printf "%s\n",$0}}' ${dataFilePath}`;
     if [[ $recods != "" ]] ; then 
         #not Empty
         #column -t -o '|' -s, -N $tableHeader < $recods;

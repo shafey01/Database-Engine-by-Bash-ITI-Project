@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 mkdir: cannot create directory ‘Databases/’: File exists
+<<<<<<< HEAD
 shafey use  databases in Fri Feb 18 17:51:44 EET 2022
 shafey show databases in Fri Feb 18 17:51:44 EET 2022
 shafey use  databases in Fri Feb 18 17:51:55 EET 2022
@@ -284,3 +284,8 @@ imkortam show databases in Fri Feb 18 21:29:06 EET 2022
 imkortam show databases in Fri Feb 18 21:29:06 EET 2022
 imkortam drop databases in Fri Feb 18 21:29:30 EET 2022
 imkortam show databases in Fri Feb 18 21:29:30 EET 2022
+=======
+shafey use  databases in Fri Feb 18 21:17:44 EET 2022
+shafey show databases in Fri Feb 18 21:17:44 EET 2022
+shafey drop databases in Fri Feb 18 21:17:52 EET 2022
+>>>>>>> 6e193e56464ec6a7f3102069888fd0f51909c149

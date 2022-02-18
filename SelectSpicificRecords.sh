@@ -12,7 +12,7 @@ function getTableHeader
     echo $tableHeader;
 }
 
-
+echo "$LOGNAME select from $current_table in $(date)" >> dbms.log
 
 dataFilePath="./Databases/${current_DB}/Data/${current_table}";
 metadataFilePath="./Databases/${current_DB}/MetaData/${current_table}.metadata";

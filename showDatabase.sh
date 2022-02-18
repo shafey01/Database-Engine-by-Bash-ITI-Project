@@ -19,6 +19,7 @@ echo -e "\033[44m ..............................................................
 echo " " 
 else
 echo " "
+echo "$LOGNAME show databases in $(date)" >> dbms.log
 #echo "NO Databases to show"
 echo -e "\033[4m NO Databases to show  \033[m" 
 echo " " 

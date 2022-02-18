@@ -1,3 +1,0 @@
-age;string;PrimaryKey
-name;string
-add;int

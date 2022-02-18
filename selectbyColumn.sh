@@ -11,15 +11,11 @@ read col
 
 
 
-mt=$( gawk -F';' -v c=$col ' {if( c==$1 ){ print NR }}  '  Databases/$current_DB/MetaData/$tableName.metadata );
+mt=$( gawk -F':' -v c=$col ' {if( c==$1 ){ print NR }}  '  Databases/$current_DB/MetaData/$current_table.metadata );
 
-
-echo "META $mt"
-
-
-
-
-
- gawk -v x=$mt -F',' '{ print $x }'  Databases/$current_DB/Data/name ;
-
-
+if [[ $mt == "" ]] ; then 
+    #Column deosn't exist
+    echo "No such column";
+else
+ gawk -v x=$mt -F',' '{ print $x }'  Databases/$current_DB/Data/$current_table ;
+fi

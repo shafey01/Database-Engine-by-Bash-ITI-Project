@@ -25,7 +25,7 @@ do
 			"Use Database")   echo "$LOGNAME use  databases in $(date)" >> dbms.log;
 			       	. ./useDB.sh;  break;;
 			"Drop Database") echo "$LOGNAME drop databases in $(date)" >> dbms.log;
-			       	. ./dropDatabse.sh;  break;;
+			       	. ./dropDB.sh;  break;;
 		
 			"Exit") (( i=0  ))  ; clear; break ;;
 

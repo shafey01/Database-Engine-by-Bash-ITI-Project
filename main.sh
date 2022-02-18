@@ -8,6 +8,7 @@ clear;
 #PS3="MyDBMS>>  ";
 
 #export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01';
+ echo "$LOGNAME Open DBMS in $(date)" >> dbms.log;
 
 export PS3=$'\e[01;33mMyDBMS: \e[0m'
 let -i i=1

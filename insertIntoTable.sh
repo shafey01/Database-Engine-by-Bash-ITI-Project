@@ -137,6 +137,7 @@ if [[ ${aborted} == 0 ]] ; then
     record=${record::-1}    #Remove the last char (the last comma)
     echo $record >> $dataFilePath; #Admit to the datafile
     echo 'Record Saved Successfully!';
+echo "$LOGNAME insert into $current_table table in $(date)" >> dbms.log
 fi
 
 

@@ -14,4 +14,4 @@ echo "  "
 echo "  "
 column -t -o '   |' -s, -N $mt  Databases/$current_DB/Data/$tableName;
 
-
+echo "$LOGNAME select All from $current_table table in $(date)" >> dbms.log

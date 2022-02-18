@@ -11,7 +11,7 @@ This project for learning and practice Bash Programming.
 # Video Link 
 
 # Built With
-- Bsh
+- Bash
 
 # Getting Started
 ## Installation

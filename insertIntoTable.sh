@@ -46,7 +46,7 @@ function isUnique
 {
     typeset x=$1;
     typeset n=$2;
-    ret=$( cut -d, -f${n} ${dataFilePath} | grep "^${x}$");
+    ret=$( cut -d, -f${n} ${dataFilePath} | grep "\"^${x}$\"");
     if [[ ${ret} == ${x} ]] ; then
         return 1;
     else
@@ -73,6 +73,7 @@ function readField
         echo "";
 echo -e "\033[32m Input Field \"${fieldName}\": \033[m" 
         read value;
+        echo $value;
         if [[ ${nn} == 1 ]] || [[ ${pk} == 1 ]] ; then  #Not null constrain
             if ! isNotNull $value ; then
                 echo 'NULL';
@@ -118,6 +119,8 @@ echo -e "\033[31m Is not a number  \033[m"
     return $valid;
 }
 
+
+. ./showColumns.sh
 
 echo "";
 echo -e "\033[32m Inserting into: \"${current_table}\"  \033[m" 

@@ -28,15 +28,15 @@ if [[ ${ret} == ${col} ]] ; then
     echo "Enter value to be compared with: ";
     read val;
     tableHeader=$(getTableHeader $metadataFilePath);
-    recods="";
-    rows=$(awk -F, -v colNumber=$colNum -v value=$val '{if($colNumber == value){print $0}}' ${dataFilePath});
-    recods=$recods${rows};
-    if [[ recods != "" ]] ; then 
+    recods=`awk -F, -v colNumber=$colNum -v value=$val '{if($colNumber == value){printf "%s\n",$0}}' ${dataFilePath} | cat`;
+    if [[ $recods != "" ]] ; then 
         #not Empty
-        column -t -o '|' -s, -N $tableHeader $dataFilePath;
+        #column -t -o '|' -s, -N $tableHeader < $recods;
+        echo "$recods" | column -t -o '|' -s, -N $tableHeader;
     else
         #No recods found matching this condition
         echo 'No recods found matching this condition';
+    fi
 else
     echo 'No such column';
 fi

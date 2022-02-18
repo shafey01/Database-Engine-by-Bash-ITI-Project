@@ -12,7 +12,7 @@ function useTableMainMenu
             "Delete Record") . ./deleteRecord.sh; break;;
             "Select All Table") . ./insertIntoTable.sh; break;;
             "Select Column") . ./dropTable.sh; break ;;
-            "Select Record") . ./updateTable.sh; break ;;
+            "Select Record") . ./SelectSpicificRecords.sh; break ;;
             "Go back") break ;;
             *) echo "Invalid option $REPLY , choose again";;
         esac

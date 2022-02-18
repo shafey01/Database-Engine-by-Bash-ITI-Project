@@ -26,11 +26,13 @@ function useTableMainMenu
 
 . ./showTables.sh;
 
-echo 'Enter table Name';
+echo '';
+echo -e "\033[32mEnter table Name  \033[m" 
 read current_table;
 
 if [[ -f ./Databases/$current_DB/Data/$current_table ]] && [[ -f ./Databases/$current_DB/MetaData/${current_table}.metadata  ]] ; then
-    echo "Table \"${current_table}\" is selected successfully";
+    echo "";
+echo -e "\033[32mTable \"${current_table}\" is selected successfully  \033[m" 
     export current_table;
     useTableMainMenu;
 else

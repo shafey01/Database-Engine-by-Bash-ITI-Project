@@ -11,7 +11,7 @@ echo "   "
 
 while [[ "$option" != "Return to main menu" ]] 
     do
-    select option in "Show Tables" "Create New Table" "Drop existing Table" "Insert into Table" "Update Table" "Select from Table" "Use Table" "Return to main menu"
+    select option in "Show Tables" "Create New Table" "Drop existing Table" "Insert into Table" "Update Table"  "Use Table" "Return to main menu"
     do
         case $option in
             "Show Tables") . ./showTables.sh;break ;;
@@ -19,10 +19,10 @@ while [[ "$option" != "Return to main menu" ]]
             "Insert into Table") . ./insertIntoTable.sh; break;;
             "Drop existing Table") . ./dropTable.sh; break ;;
             "Update Table") . ./updateTable.sh; break ;;
-            "Select from Table") . ./selectFromTable.sh; break;;
             "Use Table") . ./useTable.sh; break;;
             "Return to main menu")  break ;;
-            *) echo "Invalid option $REPLY , choose again";;
+            *) echo -e "\033[31m Invalid option $REPLY , choose again \033[m";;
+
         esac
     done
     done
@@ -33,8 +33,8 @@ while [[ "$option" != "Return to main menu" ]]
 . showDatabase.sh;
 
 echo -e "\033[33mIf database dosen't Exist you will return to main menu \033[m" 
-echo 'Enter Database name: ';
-
+echo ' ';
+echo -e "\033[32mEnter Database name: \033[m" 
 read current_DB;
 
 if [[ -z $current_DB  ]]; then

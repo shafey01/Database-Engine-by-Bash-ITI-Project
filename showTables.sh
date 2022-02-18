@@ -14,8 +14,11 @@ if [[ -d ${dir} ]] ; then
 	    echo " "
         echo "$LOGNAME viewed tables of \"${current_DB}\" in $(date)" >> dbms.log;
     else    #Directory containing tables is empty
-        echo "Database \"${current_DB}\" has no tables yet";
+
+echo -e "\033[36m Database \"${current_DB}\" has no tables yet \033[m" 
+        echo "";
     fi
 else
-    echo 'Error in this database, the tables folder has been deleted';
+    echo '';
+echo -e "\033[31m Error in this database, the tables folder has been deleted \033[m" 
 fi

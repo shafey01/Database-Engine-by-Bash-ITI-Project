@@ -46,7 +46,7 @@ function isUnique
 {
     typeset x=$1;
     typeset n=$2;
-    ret=$( cut -d, -f${n} ${dataFilePath} | grep ${x}; );
+    ret=$( cut -d, -f${n} ${dataFilePath} | grep "^${x}$");
     if [[ ${ret} == ${x} ]] ; then
         return 1;
     else

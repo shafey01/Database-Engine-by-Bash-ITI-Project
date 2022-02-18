@@ -13,7 +13,7 @@ function useTableMainMenu
             "Insert") . ./insertIntoTable.sh;break ;;
             "Delete Record") . ./deleteRecord.sh; break;;
             "Select All Table") . ./select.sh; break;;
-            "Select Column") . ./dropTable.sh; break ;;
+            "Select Column") . ./selectbyColumn.sh; break ;;
             "Select Record") . ./SelectSpicificRecords.sh; break ;;
             "Go back") break ;;
             *) echo -e "\033[44m Invalid option $REPLY , choose again \033[m";;

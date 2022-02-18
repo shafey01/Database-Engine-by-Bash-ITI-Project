@@ -11,14 +11,12 @@ echo "   "
 
 while [[ "$option" != "Return to main menu" ]] 
     do
-    select option in "Show Tables" "Create New Table" "Drop existing Table" "Insert into Table" "Update Table"  "Use Table" "Return to main menu"
+    select option in "Show Tables" "Create New Table" "Drop existing Table" "Use Table" "Return to main menu"
     do
         case $option in
             "Show Tables") . ./showTables.sh;break ;;
             "Create New Table") . ./createTable; break;;
-            "Insert into Table") . ./insertIntoTable.sh; break;;
             "Drop existing Table") . ./dropTable.sh; break ;;
-            "Update Table") . ./updateTable.sh; break ;;
             "Use Table") . ./useTable.sh; break;;
             "Return to main menu")  break ;;
             *) echo -e "\033[31m Invalid option $REPLY , choose again \033[m";;

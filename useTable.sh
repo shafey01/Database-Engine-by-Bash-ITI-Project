@@ -7,14 +7,14 @@ function useTableMainMenu
     echo "Selected Table is: $current_table";
     while [[ "$option" != "Go back" ]] 
     do
-    select option in "Insert" "Delete" "Select All Table" "Select Column" "Select Record" "Go back"
+    select option in "Insert" "Delete Record" "Select All Table" "Select Column" "Select Record" "Go back"
     do
         case $option in
             "Insert") . ./insertIntoTable.sh;break ;;
-            "Delete") . ./createTable.sh; break;;
+            "Delete Record") . ./deleteRecord.sh; break;;
             "Select All Table") . ./select.sh; break;;
             "Select Column") . ./dropTable.sh; break ;;
-            "Select Record") . ./updateTable.sh; break ;;
+            "Select Record") . ./SelectSpicificRecords.sh; break ;;
             "Go back") break ;;
             *) echo -e "\033[44m Invalid option $REPLY , choose again \033[m";;
         esac

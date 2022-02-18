@@ -13,14 +13,9 @@ useDatabaseMainMenu(){
             "Insert into Table") . ./insertIntoTable.sh; break;;
             "Drop existing Table") . ./dropTable.sh; break ;;
             "Update Table") . ./updateTable.sh; break ;;
-<<<<<<< HEAD
-            "Select from Table") . ./select.sh; break;;
-            "Return to main menu") . ./main.sh; exit $? ;;
-=======
             "Select from Table") . ./selectFromTable.sh; break;;
             "Use Table") . ./useTable.sh; break;;
             "Return to main menu")  break ;;
->>>>>>> 2aa4bd6d7014a6bb71a662184568a6eb2ae2ce34
             *) echo "Invalid option $REPLY , choose again";;
         esac
     done

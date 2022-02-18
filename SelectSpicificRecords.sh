@@ -25,12 +25,12 @@ ret=$( cut -d: -f1 ${metadataFilePath} | grep ${col}; );
 if [[ ${ret} == ${col} ]] ; then
     #column found
 
-    colNum=$(awk -F: -v c=$col '{if(c == $1){print NR}}' $metadataFilePath);
+    colNum=$(gawk -F: -v c=$col '{if(c == $1){print NR}}' $metadataFilePath);
 echo -e "\033[32mEnter value to be compared with: \033[m" 
     echo " ";
     read val;
     tableHeader=$(getTableHeader $metadataFilePath);
-    recods=`awk -F, -v colNumber=$colNum -v value=$val '{if($colNumber == value){printf "%s\n",$0}}' ${dataFilePath}`;
+    recods=`gawk -F, -v colNumber=$colNum -v value=$val '{if($colNumber == value){printf "%s\n",$0}}' ${dataFilePath}`;
     if [[ $recods != "" ]] ; then 
         #not Empty
         #column -t -o '|' -s, -N $tableHeader < $recods;

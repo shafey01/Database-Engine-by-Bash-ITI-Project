@@ -139,9 +139,9 @@ do
 		columnMD="$columnName";
 		read -p " choose column Data Type 's/S' for String or 'i/I' for Integer (s/i) " columnDT;
 		if [[ $columnDT == "s" || $columnDT == "S"  ]] ; then
-			columnMD="$columnMD;string";
+			columnMD="$columnMD:string";
 		elif [[  $columnDT == "i" || $columnDT == "I"  ]]; then
-		       columnMD="$columnMD;int";	
+		       columnMD="$columnMD:int";	
 		fi
 		
 	#	read -p "you want to make it Primary Key?.(y/n) " primaryKey;
@@ -149,11 +149,35 @@ do
 		read -p "you want to make it Primary Key?.(y/n) " primaryKey;
 
 			if [[ $primaryKey == "y" || $primaryKey == "Y"  ]] ; then
-				columnMD="$columnMD;PrimaryKey";
+				columnMD="$columnMD:1";
 				let flag=1 ;
 				#echo "varaible i = $flag";
 			fi
+		else
+			columnMD="$columnMD:0";
 		fi
+
+		read -p "you want to make it Unique?.(y/n) " uni;
+
+                        if [[ $uni == "y" || $uni == "Y"  ]] ; then
+                                columnMD="$columnMD:1";
+                                let flag=1 ;
+                                #echo "varaible i = $flag";
+			else
+				columnMD="$columnMD:0";
+                        fi
+			
+			read -p "you want to make it Not Null?.(y/n) " n;
+
+                        if [[ $n == "y" || $n == "Y"  ]] ; then
+                                columnMD="$columnMD:1";
+                                let flag=1 ;
+                                #echo "varaible i = $flag";
+                        else
+                                columnMD="$columnMD:0";
+                        fi
+
+
 		
 		echo $columnMD >> "Databases/$current_DB/MetaData/$tableName.metadata";
 

@@ -2,7 +2,7 @@
 clear;
 function tableNameValidation(){
 
-#	echo "here $1";
+
 
 validationFlag=0;
 
@@ -10,29 +10,34 @@ IFS=' ' read -r -a tableArray <<< $1;
 
 if (( ${#tableArray[@]} > 1 )); then
 
-	echo "Table name can't contain SPACE."
+	
+echo -e "\033[31m Table name can't contain SPACE. \033[m";
 	validationFlag=1;
 
 fi
 
 if (( ${#tableArray[@]} == 0  )); then
 	
-	echo "Table name can't be EMPTY."
+	
+echo -e "\033[31m Table name can't be EMPTY. \033[m";
 	validationFlag=1;
 
 fi
 
 firstCharacter="${tableArray[0]:0:1}"
 if [[  $firstCharacter =~ [0-9] ]]; then
-	echo "Table name can't start with NUMBER."
+	
+echo -e "\033[31m Table name can't start with NUMBER. \033[m";
         validationFlag=1;
 fi
 
-if [[ "$1" =~ [A-Za-z]  ]]; then
+if [[ "$1" =~ ^[A-Za-z]  ]]; then
 
-	echo "Valid Table Name."
+	
+echo -e "\033[32m Valid Table Name.\033[m" 
 else
-	echo "Table name must have one Character."
+	
+#echo -e "\033[31m Table name must have one Character. \033[m";
 	validationFlag=1;
 
 fi
@@ -51,10 +56,12 @@ function tableExist(){
 	tableName=$2;
 	validationFlag=0;
 
-#echo "current $currentdb , $tableName "
+
 
 if [[ -f Databases/$currentdb/Data/$tableName  ]]; then
-		echo " This Table Already Exist."
+		#echo " This Table Already Exist."
+	echo -e "\033[31m This Table Already Exist.  \033[m";
+
 		validationFlag=1;
 	fi
 
@@ -71,14 +78,17 @@ IFS=' ' read -r -a  cloumnArray <<< $1;
 
 if (( ${#cloumnArray[@]} > 1 )); then
 
-        echo "Cloumn name can't contain SPACE."
+#        echo "Cloumn name can't contain SPACE."
+	 echo -e "\033[31m Cloumn name can't contain SPACE.  \033[m";
+
         validationFlag=1;
 
 fi
 
 if (( ${#cloumnArray[@]} == 0  )); then
 
-        echo "cloumn name can't be EMPTY."
+        echo ""
+echo -e "\033[31m cloumn name can't be EMPTY.  \033[m";
         validationFlag=1;
 
 fi
@@ -87,16 +97,20 @@ firstCharacter="${cloumnArray[0]:0:1}"
 echo "first $firstCharacter ...";
 
 if [[  $firstCharacter =~ [0-9] ]]; then
-        echo "cloumn name can't start with NUMBER."
+        echo ""
+echo -e "\033[31m cloumn name can't start with NUMBER.  \033[m";
         validationFlag=1;
 fi
 
 
 if [[ "$1" =~ [A-Za-z]  ]]; then
 
-        echo "Valid cloumn Name."
+        echo ""
+echo -e "\033[34m Valid cloumn Name. \033[m" 
 else
-        echo "cloumn name must have one Character."
+
+echo -e "\033[31m cloumn name must have one Character. \033[m";
+        echo ""
         validationFlag=1;
 
 fi
@@ -137,17 +151,16 @@ do
 			if [[ $primaryKey == "y" || $primaryKey == "Y"  ]] ; then
 				columnMD="$columnMD;PrimaryKey";
 				let flag=1 ;
-				echo "varaible i = $flag";
+				#echo "varaible i = $flag";
 			fi
-		else
-			echo "You can't make two Primary Key Into One Table";
 		fi
 		
 		echo $columnMD >> "Databases/$current_DB/MetaData/$tableName.metadata";
 
 
 	else
-		echo " column Name is InValid Please try a valid name";
+echo -e "\033[31m column Name is InValid Please try a valid name\033[m";
+		
 			
 	fi
 
@@ -171,9 +184,7 @@ tableExist  "$current_DB"  "$tableName";
 
 tableExistFlag=$?;
 
-echo "call1 ,,  $tableNameFlag ";
 
-echo " call2 ,, $tableExistFlag ";
 
 
 if [[ $tableNameFlag  == 0  &&  $tableExistFlag == 0 ]] ; then
@@ -181,15 +192,18 @@ if [[ $tableNameFlag  == 0  &&  $tableExistFlag == 0 ]] ; then
 	if touch Databases/$current_DB/Data/$tableName; then
 	
 		if touch Databases/$current_DB/MetaData/$tableName.metadata; then	
+			echo "$LOGNAME create $tableName table" >> dbms.log; 
 			echo "Table $tableName created successfully ";
 		else 
-			echo "there is a problem in creating table check log.";
+			echo "";
+echo -e "\033[31m there is a problem in creating table check log.  \033[m";
+
 
 		fi
 	
 
 		if createColumn; then
-			echo "OK";
+
 			cat Databases/$current_DB/MetaData/$tableName.metadata;
 		else
 			echo "Error";
@@ -200,7 +214,7 @@ if [[ $tableNameFlag  == 0  &&  $tableExistFlag == 0 ]] ; then
 	fi
 
 else
-echo " There is A problem in creating table check logs............";
+echo -e "\033[31m There is A problem in creating table check logs...  \033[m";
 fi
 
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+clear;
 
 dataFilePath="./Databases/${current_DB}/Data/${current_table}";
 metadataFilePath="./Databases/${current_DB}/MetaData/${current_table}.metadata";

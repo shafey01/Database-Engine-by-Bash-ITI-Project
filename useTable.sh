@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear;
+
 function useTableMainMenu
 {
     echo "Selected Table is: $current_table";
@@ -10,17 +12,18 @@ function useTableMainMenu
         case $option in
             "Insert") . ./insertIntoTable.sh;break ;;
             "Delete") . ./createTable.sh; break;;
-            "Select All Table") . ./insertIntoTable.sh; break;;
+            "Select All Table") . ./select.sh; break;;
             "Select Column") . ./dropTable.sh; break ;;
             "Select Record") . ./updateTable.sh; break ;;
             "Go back") break ;;
-            *) echo "Invalid option $REPLY , choose again";;
+            *) echo -e "\033[44m Invalid option $REPLY , choose again \033[m";;
         esac
     done
     done
 }
 
 
+. ./showTables.sh;
 
 echo 'Enter table Name';
 read current_table;
@@ -30,5 +33,6 @@ if [[ -f ./Databases/$current_DB/Data/$current_table ]] && [[ -f ./Databases/$cu
     export current_table;
     useTableMainMenu;
 else
-    echo 'Error, no such table!';
+  
+echo -e "\033[44m Error, no such table! \033[m"
 fi
